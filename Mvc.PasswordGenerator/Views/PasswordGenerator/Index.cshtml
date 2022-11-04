@@ -1,0 +1,35 @@
+﻿@model PasswordGeneratorViewModel
+@{
+    ViewData["Title"] = "Password Generator";
+}
+
+<script>
+    function CopyText(){
+        navigator.clipboard.writeText(document.getElementById('copy-text').innerText)
+            .then(function () {
+                console.log('text has been copied!')
+                alert("Copied!!")
+            })
+    }
+</script>
+
+<form action="~/PasswordGenerator/GeneratePassword" method="post">
+        <div class="mb-3">
+            <label for="PasswordLength" class="form-label">Password Length</label>
+            <input type="number" for="PasswordLength" name="PasswordLength" class="form-control" placeholder="Enter Length ">
+        </div>
+        <div class="mb-3">
+            <label for="SpecialCharacters" class="form-label">Use Special Characters</label>
+        <input asp-for="SpecialCharacters" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Generate Password</button>
+        </div>
+        
+    </form>
+    <div class="container" id="result">
+        <div class="d-flex align-items-baseline">
+            <button id="copy-text-btn" class="btn btn-info btn-sm" onclick="CopyText()">Copy</button>
+            <p id="copy-text" class="ms-5"><strong>@Model.PasswordResult</strong></p>
+        </div>
+    </div>
